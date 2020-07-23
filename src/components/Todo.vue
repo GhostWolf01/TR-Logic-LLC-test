@@ -1,12 +1,12 @@
 <template>
-    <div class="todo" :class="{ 'todo--active' : active }" @click="activeTodo()">
+    <div class="todo" :class="[{ 'todo--active' : active }, { 'todo--open' : todoOpen }, { 'todo--visible' : visible }]" @click="activeTodo()">
         <h2 class="todo__header">{{header}}</h2>
         <div class="todo__content">
             <TodoElem v-for="(elem, index) in todoElems"
                 :key="index"
                 :value="elem.value"
                 :valueCheck="elem.valueCheck"
-                :readonly="elem.readonly">
+                :readonly="!todoOpen">
             </TodoElem>
         </div>
     </div>
@@ -31,23 +31,25 @@ export default {
       default: [
         {
           value: 'Задание 1',
-          valueCheck: false,
-          readonly: true
+          valueCheck: false
         }
       ]
     }
   },
   data () {
     return {
-      active: false
+      active: false,
+      todoOpen: false,
+      visible: false
     }
   },
   methods: {
     activeTodo () {
-      console.log(this)
-      for (let i; i < this.$parent.$children.length; i++) {
+      for (let i = 0; i < this.$parent.$children.length; i++) {
         this.$parent.$children[i].active = false
-        this.$root.$children.activeIndex = i
+        if (this.$parent.$children[i]._uid === this._uid) {
+          this.$root.$children[0].activeIndex = i
+        }
       }
       this.active = true
     }
@@ -93,6 +95,13 @@ export default {
         &--active{
             background-color: rgba($color: #28a745, $alpha: 1) ;
             border: 5px solid rgba($color: #ffc107, $alpha: 0.8);
+        }
+        &--open{
+          width: 60%;
+          max-height: max-content;
+        }
+        &--visible{
+          display: none;
         }
     }
 </style>

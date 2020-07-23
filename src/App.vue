@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <header class="header">
+        <chevronLeft title="Назад"></chevronLeft>
         <h1 class="header__text">Заметки</h1>
         <div class="header__controls">
+          <rotateLeft title="Отменить"></rotateLeft>
+          <rotateRight title="Повторить"></rotateRight>
+          <save title="Сохранить"></save>
           <add title="Добавить"></add>
           <pencil title="Изменить"></pencil>
           <trashSimple title="Удалить"></trashSimple>
@@ -14,6 +18,10 @@
 
 <script>
 import TodoList from './components/TodoList.vue'
+import chevronLeft from './assets/icons/chevronLeft.vue'
+import rotateLeft from './assets/icons/rotateLeft.vue'
+import rotateRight from './assets/icons/rotateRight.vue'
+import save from './assets/icons/save.vue'
 import trashSimple from './assets/icons/trash-simple.vue'
 import pencil from './assets/icons/pencil.vue'
 import add from './assets/icons/add.vue'
@@ -21,7 +29,7 @@ import add from './assets/icons/add.vue'
 export default {
   name: 'App',
   components: {
-    TodoList, trashSimple, pencil, add
+    TodoList, trashSimple, pencil, add, chevronLeft, rotateRight, rotateLeft, save
   },
   data () {
     return {
@@ -31,8 +39,7 @@ export default {
           todoElems: [
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             }
           ]
         },
@@ -41,13 +48,11 @@ export default {
           todoElems: [
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             },
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             }
           ]
         },
@@ -56,18 +61,15 @@ export default {
           todoElems: [
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             },
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             },
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             }
           ]
         },
@@ -76,18 +78,15 @@ export default {
           todoElems: [
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             },
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             },
             {
               value: 'Задание 1',
-              valueCheck: false,
-              readonly: true
+              valueCheck: false
             }
           ]
         }

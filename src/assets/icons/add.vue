@@ -11,7 +11,11 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'ic add box 48px'
+      default: 'add'
+    },
+    todoOpen: {
+      type: Boolean,
+      default: false
     }
   }
 }

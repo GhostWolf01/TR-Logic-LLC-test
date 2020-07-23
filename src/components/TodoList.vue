@@ -1,5 +1,5 @@
 <template>
-    <div class="todos-list">
+    <div class="todos-list" @click="clickTodoList($event)">
       <Todo v-for="(elem, index) in todolist"
       :key="index"
       :header="elem.header"
@@ -20,6 +20,16 @@ export default {
       type: Array,
       // eslint-disable-next-line vue/require-valid-default-prop
       default: []
+    }
+  },
+  methods: {
+    clickTodoList (event) {
+      if (this.$el === event.target) {
+        for (const el of this.$children) {
+          el.active = false
+        }
+        this.$root.$children[0].activeIndex = -1
+      }
     }
   }
 }
