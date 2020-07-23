@@ -124,7 +124,7 @@ export default {
 .header{
   width: 100%;
   box-sizing: border-box;
-  height: 50px;
+  height: 60px;
   padding: 10px;
   display: flex;
   justify-content: space-around;

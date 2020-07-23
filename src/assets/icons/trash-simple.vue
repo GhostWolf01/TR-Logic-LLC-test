@@ -1,5 +1,6 @@
 <template>
-  <svg @click="deleteTodo()" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" xml:space="preserve" width="32" height="32"><title>{{title}}</title><g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" fill="#111111" stroke="#111111"><polyline fill="none" stroke="#111111" stroke-miterlimit="10" points="27,10 27,31 5,31 5,10 "/> <line fill="none" stroke-miterlimit="10" x1="16" y1="15" x2="16" y2="25"/> <line fill="none" stroke-miterlimit="10" x1="11" y1="15" x2="11" y2="25"/> <line fill="none" stroke-miterlimit="10" x1="21" y1="15" x2="21" y2="25"/> <polyline fill="none" stroke="#111111" stroke-miterlimit="10" points="11,6 11,1 21,1 21,6 "/> <line fill="none" stroke="#111111" stroke-miterlimit="10" x1="30" y1="6" x2="2" y2="6"/></g></svg>
+  <svg @click="deleteTodo()" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><title>trash-simple</title><g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" fill="#000000" stroke="#000000"><polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="40,16 40,46 8,46 8,16 "></polyline> <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="2" y1="10" x2="46" y2="10"></line> <line fill="none" stroke-miterlimit="10" x1="24" y1="22" x2="24" y2="37"></line> <line fill="none" stroke-miterlimit="10" x1="16" y1="22" x2="16" y2="37"></line> <line fill="none" stroke-miterlimit="10" x1="32" y1="22" x2="32" y2="37"></line> <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="16,10 16,2 32,2 32,10 "></polyline></g>
+  </svg>
 </template>
 
 <script>
@@ -21,7 +22,8 @@ export default {
       } else {
         if (this.$parent.activeIndex > -1) {
           this.$parent.todolist.splice(this.$parent.activeIndex, 1)
-          for (const el of this.$root.$children[0].$children[3].$children) {
+          const app = this.$root.$children[0].$children
+          for (const el of app[app.length - 1].$children) {
             el.active = false
           }
           this.$parent.activeIndex = -1
@@ -33,7 +35,5 @@ export default {
 </script>
 
 <style lang="scss">
-  svg{
-    cursor: pointer;
-  }
+
 </style>

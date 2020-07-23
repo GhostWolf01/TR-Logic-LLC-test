@@ -1,6 +1,6 @@
 <template>
     <div class="todo-elem">
-        <input class="todo-elem__checkbox" :value="valueCheck" :disabled="readonly"  type="checkbox"><input class="todo-elem__text" :value="value" :readonly="readonly" type="text">
+        <input class="todo-elem__checkbox" :value="valueCheck" :disabled="checkActive"  type="checkbox"><input class="todo-elem__text" :value="value" :readonly="readonly" type="text">
     </div>
 </template>
 
@@ -13,6 +13,10 @@ export default {
       default: ''
     },
     readonly: {
+      type: Boolean,
+      default: true
+    },
+    checkActive: {
       type: Boolean,
       default: true
     },

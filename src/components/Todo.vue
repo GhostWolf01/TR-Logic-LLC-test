@@ -6,7 +6,8 @@
                 :key="index"
                 :value="elem.value"
                 :valueCheck="elem.valueCheck"
-                :readonly="!todoOpen">
+                :readonly="!writeText"
+                :checkActive="!todoOpen">
             </TodoElem>
         </div>
     </div>
@@ -40,7 +41,8 @@ export default {
     return {
       active: false,
       todoOpen: false,
-      visible: false
+      visible: false,
+      writeText: false
     }
   },
   methods: {
