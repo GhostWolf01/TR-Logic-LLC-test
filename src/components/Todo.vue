@@ -1,6 +1,6 @@
 <template>
     <div class="todo" :class="[{ 'todo--active' : active }, { 'todo--open' : todoOpen }, { 'todo--visible' : visible }]" @click="activeTodo()">
-        <h2 class="todo__header">{{header}}</h2>
+        <input class="todo__header" type="text" :readonly="!writeText" v-model="header">
         <div class="todo__content">
             <TodoElem v-for="(elem, index) in todoElems"
                 :key="index"
@@ -42,7 +42,8 @@ export default {
       active: false,
       todoOpen: false,
       visible: false,
-      writeText: false
+      writeText: false,
+      activeElem: -1
     }
   },
   methods: {
@@ -74,33 +75,44 @@ export default {
         border-radius: 10px;
         background-color: rgba($color: #28a745, $alpha: 0.6) ;
         margin-top: 10px;
+        @media screen and (max-width: 768px) {
+          width:  80%;
+        }
         &__header{
-            font-family: 'Roboto';
-            font-weight: normal;
-            font-size: 28px;
-            line-height: 28px;
-            width: 100%;
-            text-align: center;
-            padding-bottom: 5px;
-            margin-bottom: 5px;
-            border-bottom: 1px solid #343a40;
+          font-family: 'Roboto';
+          font-weight: normal;
+          font-size: 28px;
+          line-height: 28px;
+          width: 100%;
+          text-align: center;
+          padding-bottom: 5px;
+          margin-bottom: 5px;
+          border-bottom: 1px solid #343a40;
+          border: none;
+          background: none;
+          &:focus{
+            outline: none;
+          }
         }
         &__content{
-            display: flex;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
+          display: flex;
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          flex-direction: column;
+          justify-content: start;
+          align-items: center;
         }
         &--active{
-            background-color: rgba($color: #28a745, $alpha: 1) ;
-            border: 5px solid rgba($color: #ffc107, $alpha: 0.8);
+          background-color: rgba($color: #28a745, $alpha: 1) ;
+          border: 5px solid rgba($color: #ffc107, $alpha: 0.8);
         }
         &--open{
           width: 60%;
           max-height: max-content;
+          @media screen and (max-width: 768px) {
+            width:  80%;
+          }
         }
         &--visible{
           display: none;

@@ -7,9 +7,9 @@
           <rotateLeft title="Отменить"></rotateLeft>
           <rotateRight title="Повторить"></rotateRight>
           <save title="Сохранить"></save>
-          <add title="Добавить"></add>
-          <pencil title="Изменить"></pencil>
-          <trashSimple title="Удалить"></trashSimple>
+          <add title="Добавить" :todoOpen="todoOpen" ></add>
+          <pencil title="Изменить" :todoOpen="todoOpen"></pencil>
+          <trashSimple title="Удалить" :todoOpen="todoOpen"></trashSimple>
         </div>
     </header>
     <TodoList :todolist="todolist"></TodoList>
@@ -33,66 +33,39 @@ export default {
   },
   data () {
     return {
-      todolist: [
-        {
-          header: 'Заголовок 1',
-          todoElems: [
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            }
-          ]
-        },
-        {
-          header: 'Заголовок 1',
-          todoElems: [
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            },
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            }
-          ]
-        },
-        {
-          header: 'Заголовок 1',
-          todoElems: [
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            },
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            },
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            }
-          ]
-        },
-        {
-          header: 'Заголовок 1',
-          todoElems: [
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            },
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            },
-            {
-              value: 'Задание 1',
-              valueCheck: false
-            }
-          ]
-        }
-      ],
-      activeIndex: -1
+      activeIndex: -1,
+      todoOpen: false,
+      todolist: [],
+      todolistChange: [],
+      todolistChangeActive: true
     }
+  },
+  watch: {
+    todolist: {
+      handler: function (val) {
+        if (this.todolistChangeActive) {
+          this.todolistChange.push(JSON.parse(JSON.stringify(val)))
+          this.$children[1].indexChange = -1
+          if (this.todolistChange.length > 100) {
+            this.todolistChange.shift()
+          }
+          console.log(this.todolistChange)
+        }
+      },
+      deep: true
+    }
+  },
+  mounted () {
+    if ((localStorage.TodoList != null) && (localStorage.TodoList !== '')) {
+      this.todolist = JSON.parse(localStorage.TodoList)
+    }
+    window.onbeforeunload = () => {
+      this.$children[3].save()
+      return false
+    }
+  },
+  beforeDestroy () {
+    this.$children[3].save()
   }
 }
 </script>
@@ -121,6 +94,9 @@ export default {
   margin: 0;
   padding: 0;
 }
+#app {
+  height: 100%;
+}
 .header{
   width: 100%;
   box-sizing: border-box;
@@ -137,10 +113,15 @@ export default {
     color: black;
   }
   &__controls{
-    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    flex-wrap: wrap;
+    height: max-content;
+  }
 }
+
 </style>
