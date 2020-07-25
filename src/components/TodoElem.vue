@@ -68,9 +68,6 @@ export default {
     font-size: 22px;
     border: none;
     background: none;
-    &:focus{
-      outline: none;
-    }
     &--dec{
       text-decoration: line-through;
     }
